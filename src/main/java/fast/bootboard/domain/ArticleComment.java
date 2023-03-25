@@ -33,15 +33,12 @@ public class ArticleComment {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @Column(nullable = false, length = 100)
     @CreatedBy
     private String createdBy;
 
-    @Column(nullable = false, length = 100)
     @LastModifiedDate
     private LocalDateTime modifiedAt;
 
-    @Column(nullable = false, length = 100)
     @LastModifiedBy
     private String modifiedBy;
 
