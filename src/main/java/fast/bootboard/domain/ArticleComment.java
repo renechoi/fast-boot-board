@@ -1,13 +1,8 @@
 package fast.bootboard.domain;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter
@@ -19,7 +14,8 @@ import java.util.Objects;
         @Index(columnList = "createdBy")
 })
 @Entity
-public class ArticleComment {
+public class ArticleComment extends AuditingFields{
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -30,18 +26,6 @@ public class ArticleComment {
     private String content;
 
 
-    @CreatedDate
-    private LocalDateTime createdAt;
-
-    @CreatedBy
-    private String createdBy;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedAt;
-
-    @LastModifiedBy
-    private String modifiedBy;
-
     private ArticleComment(Article article, String content) {
         this.article = article;
         this.content = content;
@@ -50,7 +34,6 @@ public class ArticleComment {
     public static ArticleComment of (Article article, String content) {
         return new ArticleComment(article, content);
     }
-
 
     @Override
     public boolean equals(Object o) {
