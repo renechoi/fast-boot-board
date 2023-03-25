@@ -20,7 +20,7 @@ spring:
   jpa:
     defer-datasource-initialization: true   # data.sql => 초기값으로 실행되는 data들 실행되도록
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true

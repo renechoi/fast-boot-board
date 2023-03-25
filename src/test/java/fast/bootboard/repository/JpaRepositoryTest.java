@@ -2,6 +2,7 @@ package fast.bootboard.repository;
 
 import fast.bootboard.config.JpaConfig;
 import fast.bootboard.domain.Article;
+import fast.bootboard.domain.UserAccount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,56 +14,83 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("JPA 연결 테스트")
-@DataJpaTest
 @Import(JpaConfig.class)
+@DataJpaTest
 class JpaRepositoryTest {
 
     private final ArticleRepository articleRepository;
     private final ArticleCommentRepository articleCommentRepository;
+    private final UserAccountRepository userAccountRepository;
 
-    public JpaRepositoryTest(@Autowired  ArticleRepository articleRepository, @Autowired ArticleCommentRepository articleCommentRepository) {
+    public JpaRepositoryTest(
+            @Autowired ArticleRepository articleRepository,
+            @Autowired ArticleCommentRepository articleCommentRepository,
+            @Autowired UserAccountRepository userAccountRepository
+    ) {
         this.articleRepository = articleRepository;
         this.articleCommentRepository = articleCommentRepository;
+        this.userAccountRepository = userAccountRepository;
     }
 
+    @DisplayName("select 테스트")
     @Test
-    void select() {
+    void givenTestData_whenSelecting_thenWorksFine() {
+        // Given
+
+        // When
         List<Article> articles = articleRepository.findAll();
-        assertThat(articles).isNotNull().hasSize(123);
+
+        // Then
+        assertThat(articles)
+                .isNotNull()
+                .hasSize(123);
     }
 
     @DisplayName("insert 테스트")
     @Test
-    void insert() {
+    void givenTestData_whenInserting_thenWorksFine() {
+        // Given
         long previousCount = articleRepository.count();
-        Article savedArticle = articleRepository.save(Article.of("new article", "new content", "#spring"));
+        UserAccount userAccount = userAccountRepository.save(UserAccount.of("uno", "pw", null, null, null));
+        Article article = Article.of(userAccount, "new article", "new content", "#spring");
+
+        // When
+        articleRepository.save(article);
+
+        // Then
         assertThat(articleRepository.count()).isEqualTo(previousCount + 1);
     }
 
     @DisplayName("update 테스트")
     @Test
-    void update() {
+    void givenTestData_whenUpdating_thenWorksFine() {
+        // Given
         Article article = articleRepository.findById(1L).orElseThrow();
         String updatedHashtag = "#springboot";
         article.setHashtag(updatedHashtag);
 
+        // When
         Article savedArticle = articleRepository.saveAndFlush(article);
+
+        // Then
         assertThat(savedArticle).hasFieldOrPropertyWithValue("hashtag", updatedHashtag);
     }
 
     @DisplayName("delete 테스트")
     @Test
-    void delete() {
+    void givenTestData_whenDeleting_thenWorksFine() {
+        // Given
         Article article = articleRepository.findById(1L).orElseThrow();
         long previousArticleCount = articleRepository.count();
         long previousArticleCommentCount = articleCommentRepository.count();
         int deletedCommentsSize = article.getArticleComments().size();
 
+        // When
         articleRepository.delete(article);
 
+        // Then
         assertThat(articleRepository.count()).isEqualTo(previousArticleCount - 1);
         assertThat(articleCommentRepository.count()).isEqualTo(previousArticleCommentCount - deletedCommentsSize);
     }
 
 }
-
