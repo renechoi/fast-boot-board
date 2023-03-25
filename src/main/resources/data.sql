@@ -325,3 +325,8 @@ insert into article_comment (article_id, content, created_at, modified_at, creat
 insert into article_comment (article_id, content, created_at, modified_at, created_by, modified_by) values (63, 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', '2023-02-02 15:18:17', '2022-12-26 02:56:05', 'Cobbie', 'Theodora');
 insert into article_comment (article_id, content, created_at, modified_at, created_by, modified_by) values (33, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.', '2022-06-04 03:55:27', '2022-07-12 11:27:48', 'Tammie', 'Roda');
 insert into article_comment (article_id, content, created_at, modified_at, created_by, modified_by) values (96, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.', '2022-10-06 19:40:40', '2022-08-18 16:44:00', 'Cahra', 'Suzette');
+
+--
+
+insert into user_account (user_id, user_password, nickname, email, memo, created_at, created_by, modified_at, modified_by) values
+    ('user', 'asdf1234', 'user', 'user@mail.com', 'I am test.', now(), 'user', now(), 'user')
