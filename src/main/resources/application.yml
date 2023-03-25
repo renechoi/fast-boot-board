@@ -31,7 +31,10 @@ spring:
   sql:
     init:
       mode: always        # 초기로 설정하는 data 언제 하는지
-
+  data:
+    rest:
+      base-path: /api
+      detection-strategy: annotated
 
 ---
 #spring:
