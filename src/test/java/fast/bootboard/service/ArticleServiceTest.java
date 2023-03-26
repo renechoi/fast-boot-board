@@ -1,10 +1,8 @@
 package fast.bootboard.service;
 
 import fast.bootboard.domain.Article;
-import fast.bootboard.domain.UserAccount;
-import fast.bootboard.domain.type.SearchType;
+import fast.bootboard.domain.constant.SearchType;
 import fast.bootboard.dto.ArticleDto;
-import fast.bootboard.dto.ArticleUpdateDto;
 import fast.bootboard.dto.ArticleWithCommentsDto;
 import fast.bootboard.dto.UserAccountDto;
 import fast.bootboard.repository.ArticleRepository;

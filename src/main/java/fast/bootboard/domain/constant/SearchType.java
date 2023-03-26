@@ -1,4 +1,4 @@
-package fast.bootboard.domain.type;
+package fast.bootboard.domain.constant;
 
 import lombok.Getter;
 

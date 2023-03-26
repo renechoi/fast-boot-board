@@ -2,7 +2,7 @@ package fast.bootboard.controller;
 
 
 import fast.bootboard.config.SecurityConfig;
-import fast.bootboard.domain.type.SearchType;
+import fast.bootboard.domain.constant.SearchType;
 import fast.bootboard.dto.ArticleWithCommentsDto;
 import fast.bootboard.dto.UserAccountDto;
 import fast.bootboard.service.ArticleService;
