@@ -12,7 +12,7 @@ plugins {
 }
 
 group = 'fast'
-version = '0.0.1-SNAPSHOT'
+version = 'v1.1'
 sourceCompatibility = '17'
 
 configurations {
@@ -89,4 +89,11 @@ configurations {
 		extendsFrom annotationProcessor
 	}
 	querydsl.extendsFrom compileClasspath
+}
+
+//heroku 설정
+jar{
+	manifest {
+		attributes('Main-Class': 'fast.bootboard.BootBoardApplication')
+	}
 }
