@@ -23,7 +23,7 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .mvcMatchers(HttpMethod.GET, "/", "/articles", "/article/search-hashtag")
+                        .mvcMatchers(HttpMethod.GET, "/", "/articles", "/articles/search-hashtag")
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin().and()

@@ -28,6 +28,17 @@ public record BoardPrincipal(
         return BoardPrincipal.of(dto.userId(), dto.userPassword(), dto.email(), dto.nickname(), dto.memo());
     }
 
+    public UserAccountDto toDto() {
+        return UserAccountDto.of(
+                username,
+                password,
+                email,
+                nickname,
+                memo
+        );
+    }
+
+
     @Override
     public String getUsername() {
         return username;
