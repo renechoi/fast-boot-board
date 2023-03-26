@@ -2,6 +2,7 @@ package fast.bootboard.repository;
 
 import fast.bootboard.config.JpaConfig;
 import fast.bootboard.domain.Article;
+import fast.bootboard.domain.UserAccount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
