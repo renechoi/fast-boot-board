@@ -2,6 +2,7 @@ package fast.bootboard.service;
 
 import fast.bootboard.domain.Article;
 import fast.bootboard.domain.ArticleComment;
+import fast.bootboard.domain.Hashtag;
 import fast.bootboard.domain.UserAccount;
 import fast.bootboard.dto.ArticleCommentDto;
 import fast.bootboard.dto.UserAccountDto;
@@ -18,21 +19,19 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.BDDMockito.then;
 
 @DisplayName("비즈니스 로직 - 댓글")
 @ExtendWith(MockitoExtension.class)
 class ArticleCommentServiceTest {
 
-    @InjectMocks
-    private ArticleCommentService sut;
+    @InjectMocks private ArticleCommentService sut;
 
-    @Mock
-    private ArticleRepository articleRepository;
+    @Mock private ArticleRepository articleRepository;
     @Mock private ArticleCommentRepository articleCommentRepository;
     @Mock private UserAccountRepository userAccountRepository;
 
@@ -167,7 +166,7 @@ class ArticleCommentServiceTest {
 
     private ArticleComment createArticleComment(String content) {
         return ArticleComment.of(
-                Article.of(createUserAccount(), "title", "content", "hashtag"),
+                createArticle(),
                 createUserAccount(),
                 content
         );
@@ -184,12 +183,18 @@ class ArticleCommentServiceTest {
     }
 
     private Article createArticle() {
-        return Article.of(
+        Article article = Article.of(
                 createUserAccount(),
                 "title",
-                "content",
-                "#java"
+                "content"
         );
+        article.addHashtags(Set.of(createHashtag(article)));
+
+        return article;
+    }
+
+    private Hashtag createHashtag(Article article) {
+        return Hashtag.of("java");
     }
 
 }
