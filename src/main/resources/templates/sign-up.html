@@ -2,32 +2,50 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
   <title>회원 가입</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+  <style>
+    .error-message {
+      color: red;
+    }
+  </style>
+
 </head>
-<body>
-  <header>
-    header 템플릿 삽입부
-    <hr>
+
+<body class="bg-light">
+
+<div class="container">
+  <header class="py-5 text-center">
+    <h1>회원 가입</h1>
   </header>
 
-  <form>
-    <label for="userId">ID</label>
-    <input id="userId" type="text" required>
-    <label for="password">Password</label>
-    <input id="password" type="password" required>
-    <label for="email">Email</label>
-    <input id="email" type="email" placeholder="you@example.com">
-    <label for="nickname">Nickname</label>
-    <input id="nickname" type="text">
-    <label for="memo">메모</label>
-    <textarea id="memo" rows="3"></textarea>
-    <button type="submit">가입</button>
+  <form action="#" method="post" th:object="${signupRequest}">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
+      <small class="error-message" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+      <small class="error-message" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+    </div>
+    <div class="mb-3">
+      <label for="confirmPassword" class="form-label">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}">
+      <small class="error-message" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
+    </div>
+    <button type="submit" class="btn btn-primary">회원 가입</button>
   </form>
 
-  <footer>
-    <hr>
-    footer 템플릿 삽입부
-  </footer>
+</div>
 
 </body>
 </html>

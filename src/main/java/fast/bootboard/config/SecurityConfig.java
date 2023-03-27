@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -20,13 +19,29 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+//                        .mvcMatchers(HttpMethod.GET, "/", "/articles", "/articles/search-hashtag")
+//                        .permitAll()
+//                        .anyRequest().authenticated())
+//                .formLogin().and()
+//                .logout()
+//                .logoutSuccessUrl("/")
+//                .and()
+//                .build();
+
+
         return http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .mvcMatchers(HttpMethod.GET, "/", "/articles", "/articles/search-hashtag")
                         .permitAll()
+                        .mvcMatchers(HttpMethod.GET, "/sign-up").permitAll() // 회원 가입 페이지는 인증되지 않은 사용자만 접근할 수 있도록 설정
                         .anyRequest().authenticated())
-                .formLogin().and()
+                .formLogin()
+                .defaultSuccessUrl("/") // 회원 가입 후 로그인 처리
+                .and()
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
