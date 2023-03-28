@@ -1,4 +1,4 @@
-buildscript {
+ buildscript {
 	ext {
 		queryDslVersion = "5.0.0"
 		springCloudVersion = "2022.0.1"
