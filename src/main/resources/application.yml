@@ -13,12 +13,12 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/fastboard
-    username: Rene
-    password: 1234
-#    url: jdbc:mysql://localhost:3306/fast_boot_board
-#    username: rene
-#    password: itiswhatitis
+    url: ${LOCAL_DB_URL} # jdbc:postgresql://localhost:5432/fastboard
+    username: ${LOCAL_DB_USERNAME} # Rene
+    password: ${LOCAL_DB_PASSWORD} # 1234
+#    url: ${LOCAL_DB_URL} # jdbc:mysql://localhost:3306/fast_boot_board
+#    username: ${LOCAL_DB_USERNAME} # rene
+#    password: ${LOCAL_DB_PASSWORD} # itiswhatitis
 #    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     defer-datasource-initialization: true   # data.sql => 초기값으로 실행되는 data들 실행되도록
@@ -46,8 +46,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id: 96d45143d67b5449cb81a098cc354c6d
-            client-secret: key
+            client-id: ${KAKAO_OAUTH_CLIENT_ID} # 96d45143d67b5449cb81a098cc354c6d
+            client-secret: ${KAKAO_OAUTH_CLIENT_SECRET} # W41QQl3dORFdBSNUyR46No2boTwPWiZn
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/kakao"
             client-authentication-method: POST
