@@ -1,6 +1,7 @@
 package fast.bootboard.repository;
 
 import fast.bootboard.domain.Hashtag;
+import fast.bootboard.domain.projection.ArticleProjection;
 import fast.bootboard.repository.querydsl.HashtagRepositoryCustom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
