@@ -1,8 +1,8 @@
 package fast.bootboard.domain;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -23,10 +23,13 @@ public class ArticleComment extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(optional = false)
+    @Setter
+    @ManyToOne(optional = false)
     private Article article; // 게시글 (ID)
 
-    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
+    @Setter
+    @JoinColumn(name = "userId")
+    @ManyToOne(optional = false)
     private UserAccount userAccount; // 유저 정보 (ID)
 
     @Setter
@@ -38,8 +41,7 @@ public class ArticleComment extends AuditingFields {
     @OneToMany(mappedBy = "parentCommentId", cascade = CascadeType.ALL)
     private Set<ArticleComment> childComments = new LinkedHashSet<>();
 
-    @Setter @Column(nullable = false, length = 500)
-    private String content; // 본문
+    @Setter @Column(nullable = false, length = 500) private String content; // 본문
 
 
     protected ArticleComment() {}
@@ -55,7 +57,7 @@ public class ArticleComment extends AuditingFields {
         return new ArticleComment(article, userAccount, null, content);
     }
 
-    public void addChildComment(ArticleComment child){
+    public void addChildComment(ArticleComment child) {
         child.setParentCommentId(this.getId());
         this.getChildComments().add(child);
     }
@@ -64,7 +66,7 @@ public class ArticleComment extends AuditingFields {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ArticleComment that)) return false;
-        return this.getId() != null && id.equals(that.getId());
+        return this.getId() != null && this.getId().equals(that.getId());
     }
 
     @Override

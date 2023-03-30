@@ -16,7 +16,7 @@ import java.util.Optional;
 public class JpaConfig {
 
     @Bean
-    public AuditorAware<String> auditorAware(){
+    public AuditorAware<String> auditorAware() {
         return () -> Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .filter(Authentication::isAuthenticated)
@@ -24,4 +24,5 @@ public class JpaConfig {
                 .map(BoardPrincipal.class::cast)
                 .map(BoardPrincipal::getUsername);
     }
+
 }

@@ -1,7 +1,5 @@
 package fast.bootboard.controller;
 
-
-import fast.bootboard.dto.UserAccountDto;
 import fast.bootboard.dto.request.ArticleCommentRequest;
 import fast.bootboard.dto.security.BoardPrincipal;
 import fast.bootboard.service.ArticleCommentService;
@@ -19,18 +17,17 @@ public class ArticleCommentController {
 
     private final ArticleCommentService articleCommentService;
 
-    @PostMapping ("/new")
+    @PostMapping("/new")
     public String postNewArticleComment(
             @AuthenticationPrincipal BoardPrincipal boardPrincipal,
             ArticleCommentRequest articleCommentRequest
     ) {
         articleCommentService.saveArticleComment(articleCommentRequest.toDto(boardPrincipal.toDto()));
 
-
         return "redirect:/articles/" + articleCommentRequest.articleId();
     }
 
-    @PostMapping ("/{commentId}/delete")
+    @PostMapping("/{commentId}/delete")
     public String deleteArticleComment(
             @PathVariable Long commentId,
             @AuthenticationPrincipal BoardPrincipal boardPrincipal,

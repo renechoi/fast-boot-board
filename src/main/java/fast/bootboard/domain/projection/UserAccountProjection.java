@@ -1,4 +1,3 @@
-
 package fast.bootboard.domain.projection;
 
 import fast.bootboard.domain.UserAccount;

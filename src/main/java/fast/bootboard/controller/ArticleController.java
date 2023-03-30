@@ -2,7 +2,6 @@ package fast.bootboard.controller;
 
 import fast.bootboard.domain.constant.FormStatus;
 import fast.bootboard.domain.constant.SearchType;
-import fast.bootboard.dto.UserAccountDto;
 import fast.bootboard.dto.request.ArticleRequest;
 import fast.bootboard.dto.response.ArticleResponse;
 import fast.bootboard.dto.response.ArticleWithCommentsResponse;
@@ -84,8 +83,11 @@ public class ArticleController {
         return "articles/form";
     }
 
-    @PostMapping ("/form")
-    public String postNewArticle(ArticleRequest articleRequest, @AuthenticationPrincipal BoardPrincipal boardPrincipal) {
+    @PostMapping("/form")
+    public String postNewArticle(
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+            ArticleRequest articleRequest
+    ) {
         articleService.saveArticle(articleRequest.toDto(boardPrincipal.toDto()));
 
         return "redirect:/articles";
@@ -101,19 +103,24 @@ public class ArticleController {
         return "articles/form";
     }
 
-    @PostMapping ("/{articleId}/form")
-    public String updateArticle(@PathVariable Long articleId,
-                                ArticleRequest articleRequest,
-                                @AuthenticationPrincipal BoardPrincipal boardPrincipal) {
-
+    @PostMapping("/{articleId}/form")
+    public String updateArticle(
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal,
+            ArticleRequest articleRequest
+    ) {
         articleService.updateArticle(articleId, articleRequest.toDto(boardPrincipal.toDto()));
 
         return "redirect:/articles/" + articleId;
     }
 
-    @PostMapping ("/{articleId}/delete")
-    public String deleteArticle(@PathVariable Long articleId, @AuthenticationPrincipal BoardPrincipal boardPrincipal) {
+    @PostMapping("/{articleId}/delete")
+    public String deleteArticle(
+            @PathVariable Long articleId,
+            @AuthenticationPrincipal BoardPrincipal boardPrincipal
+    ) {
         articleService.deleteArticle(articleId, boardPrincipal.getUsername());
+
         return "redirect:/articles";
     }
 

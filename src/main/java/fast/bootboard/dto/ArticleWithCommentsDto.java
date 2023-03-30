@@ -1,5 +1,6 @@
 package fast.bootboard.dto;
 
+
 import fast.bootboard.domain.Article;
 
 import java.time.LocalDateTime;

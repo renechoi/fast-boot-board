@@ -1,6 +1,5 @@
 package fast.bootboard.service;
 
-
 import fast.bootboard.domain.Article;
 import fast.bootboard.domain.ArticleComment;
 import fast.bootboard.domain.UserAccount;
